@@ -1,0 +1,35 @@
+.typist-inline {
+  display: inline;
+}
+
+.App-header {
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--primary-color);
+  padding: 5px 20px;
+}
+
+.App-logo {
+  height: 50px;
+  width: 50px;
+  pointer-events: none;
+}
+
+.glass {
+  // backdrop-filter: blur(5px);
+  border: 0;
+  // border-style: outset;
+  // border-bottom: 2px outset var(--shadow-color);
+  overflow-x: "hidden";
+  // border-radius: 5px;
+  // box-shadow: 1px 2px 10px 0px var(--shadow-color);
+  box-shadow: 0px -2px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.glass:before {
+  filter: blur(10px);
+}
