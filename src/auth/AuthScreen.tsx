@@ -1,9 +1,8 @@
 import React from "react";
 import "./AuthScreen.scss";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { FacebookLoginButton } from "./social/SocialBtns";
+
 import { SignUpView } from "./SignUpView";
-import { Divider, Typography, Button } from "antd";
+import { Divider, Button } from "antd";
 
 import { GoogleIcon } from "../common/icons/GoogleIcon";
 
@@ -27,7 +26,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
           </div>
           <div className="socialView">
             <div className="socialView__btnView">
-              {/* <GoogleLoginButton /> */}
               <Button block>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <GoogleIcon />
@@ -36,7 +34,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
               </Button>
             </div>
             <div className="socialView__btnView">
-              {/* <FacebookLoginButton /> */}
               <Button block>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <FacebookIcon />
