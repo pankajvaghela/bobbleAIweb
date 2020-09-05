@@ -1,3 +1,16 @@
+#Bobble Ai Web Assignment
+
+Project for BobbleAI web assignment
+
+---
+
+This project contains signup page.
+
+- uses api by reqres.in
+- axios for making request
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
