@@ -8,8 +8,10 @@ Live at https://bobble-ai-web.vercel.app/
 
 - This project contains signup page as per mockup image.
 - uses api by reqres.in
-
 - used **Antd** Component Framework
+- With Facebook login implemented
+
+[NOTE] : on firefox FB Login may not work due to CORS issue, but works on Chrome.
 
 ---
 
