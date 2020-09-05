@@ -4,8 +4,7 @@ import "./AuthScreen.scss";
 import { SignUpView } from "./SignUpView";
 import { notification, Divider, Button, Result } from "antd";
 
-import { GoogleIcon } from "../common/icons/GoogleIcon";
-import { FacebookIcon } from "../common/icons/FacebookIcon";
+import { SocialLoginView, SocialUser } from "./SocialLoginView";
 
 interface AuthScreenProps {}
 
@@ -22,16 +21,22 @@ export type UserInfoForm = UserInfo & {
 
 // status of reqres.in API request
 const API_STATUS = {
-  IDLE: 0,
-  LOADING: 1,
-  RESOLVED: 2,
-  REJECTED: 3,
+  IDLE: "IDLE",
+  LOADING: "LOADING",
+  RESOLVED: "RESOLVED",
+  REJECTED: "REJECTED",
+};
+
+type AuthStateType = {
+  status: string;
+  isLoggedIn: boolean;
+  data: null | object;
 };
 
 export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
   (_, __) => {
     // holds state of auth, usually lives in redux
-    const [authState, setAuthState] = React.useState({
+    const [authState, setAuthState] = React.useState<AuthStateType>({
       status: API_STATUS.IDLE,
       isLoggedIn: false,
       data: null,
@@ -78,11 +83,25 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
     };
 
     // This will log out user and show sign up form again
-    const onSignUpAgain = React.useCallback(() => {
+    const onSocialLogin = (user: SocialUser) => {
+      setAuthState({
+        isLoggedIn: true,
+        status: API_STATUS.RESOLVED,
+        data: user,
+      });
+
+      setUserInput({
+        firstName: user.name,
+        email: user.email,
+      });
+    };
+
+    // This will log out user and show sign up form again
+    const onSignUpAgain = () => {
       setAuthState({ isLoggedIn: false, status: API_STATUS.IDLE, data: null });
 
       setUserInput(null);
-    }, []);
+    };
 
     return (
       <section id="authSection">
@@ -105,25 +124,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
                   {"Lorem ipsum dolor sit amet consectetur, adipisicing elit."}
                 </div>
               </div>
-              {/* Social login buttons */}
-              <div className="socialView">
-                <div className="socialView__btnView">
-                  <Button block>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <GoogleIcon />
-                      Sign up with Google
-                    </div>
-                  </Button>
-                </div>
-                <div className="socialView__btnView">
-                  <Button block>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <FacebookIcon />
-                      Sign up with Facebook
-                    </div>
-                  </Button>
-                </div>
-              </div>
+              <SocialLoginView onSocialLogin={onSocialLogin} />
 
               <Divider>
                 <span className="dividerText">or</span>
