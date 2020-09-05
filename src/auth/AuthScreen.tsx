@@ -15,6 +15,7 @@ type UserInfo = {
   email: string;
 };
 
+//data that will be sent to signup api
 export type UserInfoForm = UserInfo & {
   password: string;
 };
@@ -49,8 +50,9 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
         },
         body: JSON.stringify(user),
       })
-        .then((response) => response.json())
+        .then((response) => response.json()) // parse json data
         .then((data) => {
+          // If error show error in notification with message
           if (data.error) {
             setAuthState({
               isLoggedIn: false,
@@ -62,6 +64,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
               description: data.error,
             });
           } else {
+            // if success store in state
             setAuthState({
               isLoggedIn: true,
               status: API_STATUS.RESOLVED,
@@ -75,11 +78,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
     };
 
     // This will log out user and show sign up form again
-    const onSignUpAgain = () => {
+    const onSignUpAgain = React.useCallback(() => {
       setAuthState({ isLoggedIn: false, status: API_STATUS.IDLE, data: null });
 
       setUserInput(null);
-    };
+    }, []);
+
     return (
       <section id="authSection">
         <div id="authBox">
@@ -94,12 +98,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = React.forwardRef(
               <div className="text-center actionNameView">
                 <span>SIGN UP</span>
               </div>
+              {/* Labels on top */}
               <div className="text-center">
                 <div className="heading">Create your account</div>
                 <div className="subtitle">
                   {"Lorem ipsum dolor sit amet consectetur, adipisicing elit."}
                 </div>
               </div>
+              {/* Social login buttons */}
               <div className="socialView">
                 <div className="socialView__btnView">
                   <Button block>

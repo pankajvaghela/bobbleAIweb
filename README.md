@@ -2,12 +2,14 @@
 
 Project for BobbleAI web assignment
 
+Live at https://bobble-ai-web.vercel.app/
+
 ---
 
-This project contains signup page.
-
+- This project contains signup page as per mockup image.
 - uses api by reqres.in
-- axios for making request
+
+- used **Antd** Component Framework
 
 ---
 
