@@ -1,13 +1,20 @@
 import React from "react";
-
 import { Form, Input, Button } from "antd";
+import { UserInfoForm } from "./AuthScreen";
 
-interface SignUpViewProps {}
+interface SignUpViewProps {
+  onSignUp(user: UserInfoForm): void;
+  loading: boolean;
+}
+
+type FormValues = {
+  user: UserInfoForm;
+};
 
 export const SignUpView: React.FC<SignUpViewProps> = React.forwardRef(
-  (_, __) => {
-    const onFinish = (values: any) => {
-      console.log("Received values of form: ", values);
+  ({ onSignUp, loading }, __) => {
+    const onFinish = (values: FormValues) => {
+      onSignUp(values.user);
     };
 
     return (
@@ -46,22 +53,16 @@ export const SignUpView: React.FC<SignUpViewProps> = React.forwardRef(
             ]}
             hasFeedback
           >
-            <Input.Password type="password" placeholder="Password" />
+            <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item>
-            <div className="login-form-forgot">
+            <div>
               By clicking Sign Up, you agree to our <a href="#">Terms of use</a>{" "}
               and our <a type="link">Privacy Policy</a>
             </div>
           </Form.Item>
-
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              block
-            >
+            <Button type="primary" htmlType="submit" block loading={loading}>
               SIGN UP
             </Button>
           </Form.Item>
